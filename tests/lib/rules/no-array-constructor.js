@@ -10,13 +10,13 @@
 //------------------------------------------------------------------------------
 
 const rule = require("../../../lib/rules/no-array-constructor"),
-    { RuleTester } = require("../../../lib/rule-tester");
+    RuleTester = require("../../../lib/rule-tester/flat-rule-tester");
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: "latest" } });
+const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: "latest" } });
 
 ruleTester.run("no-array-constructor", rule, {
     valid: [
@@ -218,14 +218,14 @@ ruleTester.run("no-array-constructor", rule, {
                 <foo />
                 Array()
                 `,
-                parserOptions: { ecmaFeatures: { jsx: true } }
+                languageOptions: { ecmaFeatures: { jsx: true } }
             },
             {
                 code: `
                 <foo></foo>
                 Array()
                 `,
-                parserOptions: { ecmaFeatures: { jsx: true } }
+                languageOptions: { ecmaFeatures: { jsx: true } }
             }
         ].map(props => ({
             ...props,
@@ -360,28 +360,28 @@ ruleTester.run("no-array-constructor", rule, {
                 export { foo }
                 Array()
                 `,
-                parserOptions: { sourceType: "module" }
+                languageOptions: { sourceType: "module" }
             },
             {
                 code: `
                 export { foo } from 'bar'
                 Array()
                 `,
-                parserOptions: { sourceType: "module" }
+                languageOptions: { sourceType: "module" }
             },
             {
                 code: `
                 export * as foo from 'bar'
                 Array()
                 `,
-                parserOptions: { sourceType: "module" }
+                languageOptions: { sourceType: "module" }
             },
             {
                 code: `
                 import foo from 'bar'
                 Array()
                 `,
-                parserOptions: { sourceType: "module" }
+                languageOptions: { sourceType: "module" }
             },
             {
                 code: `

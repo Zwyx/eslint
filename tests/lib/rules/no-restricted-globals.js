@@ -10,7 +10,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require("../../../lib/rules/no-restricted-globals"),
-    { RuleTester } = require("../../../lib/rule-tester");
+    RuleTester = require("../../../lib/rule-tester/flat-rule-tester");
 
 //------------------------------------------------------------------------------
 // Tests
@@ -38,7 +38,7 @@ ruleTester.run("no-restricted-globals", rule, {
         {
             code: "import foo from 'bar';",
             options: ["foo"],
-            parserOptions: { ecmaVersion: 6, sourceType: "module" }
+            languageOptions: { ecmaVersion: 6, sourceType: "module" }
         },
         {
             code: "function foo() {}",
@@ -259,7 +259,7 @@ ruleTester.run("no-restricted-globals", rule, {
         {
             code: "var foo = obj => hasOwnProperty(obj, 'name');",
             options: ["hasOwnProperty"],
-            parserOptions: { ecmaVersion: 6 },
+            languageOptions: { ecmaVersion: 6 },
             errors: [{
                 messageId: "defaultMessage",
                 data: { name: "hasOwnProperty" },
