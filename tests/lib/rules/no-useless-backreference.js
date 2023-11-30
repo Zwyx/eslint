@@ -42,7 +42,9 @@ ruleTester.run("no-useless-backreference", rule, {
         String.raw`/* globals RegExp:off */ new RegExp('\\1(a)');`,
         {
             code: String.raw`RegExp('\\1(a)');`,
-            globals: { RegExp: "off" }
+            languageOptions: {
+                globals: { RegExp: "off" }
+            }
         },
 
         // no capturing groups

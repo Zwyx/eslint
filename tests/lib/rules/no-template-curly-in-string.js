@@ -19,60 +19,52 @@ const rule = require("../../../lib/rules/no-template-curly-in-string"),
 const ruleTester = new RuleTester();
 
 const messageId = "unexpectedTemplateExpression";
-const parserOptions = { ecmaVersion: 6 };
 
 ruleTester.run("no-template-curly-in-string", rule, {
     valid: [
-        { code: "`Hello, ${name}`;", parserOptions },
-        { code: "templateFunction`Hello, ${name}`;", parserOptions },
-        { code: "`Hello, name`;", parserOptions },
-        { code: "'Hello, name';", parserOptions },
-        { code: "'Hello, ' + name;", parserOptions },
-        { code: "`Hello, ${index + 1}`", parserOptions },
-        { code: "`Hello, ${name + \" foo\"}`", parserOptions },
-        { code: "`Hello, ${name || \"foo\"}`", parserOptions },
-        { code: "`Hello, ${{foo: \"bar\"}.foo}`", parserOptions },
-        { code: "'$2'", parserOptions },
-        { code: "'${'", parserOptions },
-        { code: "'$}'", parserOptions },
-        { code: "'{foo}'", parserOptions },
-        { code: "'{foo: \"bar\"}'", parserOptions },
-        { code: "const number = 3", parserOptions }
+        { code: "`Hello, ${name}`;" },
+        { code: "templateFunction`Hello, ${name}`;" },
+        { code: "`Hello, name`;" },
+        { code: "'Hello, name';" },
+        { code: "'Hello, ' + name;" },
+        { code: "`Hello, ${index + 1}`" },
+        { code: "`Hello, ${name + \" foo\"}`" },
+        { code: "`Hello, ${name || \"foo\"}`" },
+        { code: "`Hello, ${{foo: \"bar\"}.foo}`" },
+        { code: "'$2'" },
+        { code: "'${'" },
+        { code: "'$}'" },
+        { code: "'{foo}'" },
+        { code: "'{foo: \"bar\"}'" },
+        { code: "const number = 3" }
     ],
     invalid: [
         {
             code: "'Hello, ${name}'",
-            parserOptions,
             errors: [{ messageId }]
         },
         {
             code: "\"Hello, ${name}\"",
-            parserOptions,
             errors: [{ messageId }]
         },
         {
             code: "'${greeting}, ${name}'",
-            parserOptions,
             errors: [{ messageId }]
         },
         {
             code: "'Hello, ${index + 1}'",
-            parserOptions,
             errors: [{ messageId }]
         },
         {
             code: "'Hello, ${name + \" foo\"}'",
-            parserOptions,
             errors: [{ messageId }]
         },
         {
             code: "'Hello, ${name || \"foo\"}'",
-            parserOptions,
             errors: [{ messageId }]
         },
         {
             code: "'Hello, ${{foo: \"bar\"}.foo}'",
-            parserOptions,
             errors: [{ messageId }]
         }
     ]

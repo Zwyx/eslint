@@ -53,9 +53,10 @@ function invalid(code, output, type, line, config) {
 
 const ruleTester = new RuleTester({
     languageOptions: {
-        ecmaVersion: 2022,
-        ecmaFeatures: {
-            jsx: true
+        parserOptions: {
+            ecmaFeatures: {
+                jsx: true
+            }
         }
     }
 });

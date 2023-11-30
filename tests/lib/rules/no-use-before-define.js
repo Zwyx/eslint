@@ -260,7 +260,7 @@ ruleTester.run("no-use-before-define", rule, {
         },
         {
             code: "a++; var a=19;",
-            languageOptions: { languageOptions: { ecmaVersion: 6 } },
+            languageOptions: { ecmaVersion: 6 },
             errors: [{
                 messageId: "usedBeforeDefined",
                 data: { name: "a" },

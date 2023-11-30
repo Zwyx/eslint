@@ -18,7 +18,7 @@ const rule = require("../../../lib/rules/no-await-in-loop"),
 
 const error = { messageId: "unexpectedAwait", type: "AwaitExpression" };
 
-const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 2018 } });
+const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 2018, sourceType: "script" } });
 
 ruleTester.run("no-await-in-loop", rule, {
     valid: [

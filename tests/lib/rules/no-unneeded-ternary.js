@@ -434,8 +434,10 @@ ruleTester.run("no-unneeded-ternary", rule, {
         {
             code: "foo as any ? false : true",
             output: "!(foo as any)",
-            parser: parser("typescript-parsers/unneeded-ternary-1"),
-            languageOptions: { ecmaVersion: 6 },
+            languageOptions: {
+                parser: require(parser("typescript-parsers/unneeded-ternary-1")),
+                ecmaVersion: 6
+            },
             errors: [{
                 messageId: "unnecessaryConditionalExpression",
                 type: "ConditionalExpression"
@@ -445,8 +447,10 @@ ruleTester.run("no-unneeded-ternary", rule, {
             code: "foo ? foo : bar as any",
             output: "foo || (bar as any)",
             options: [{ defaultAssignment: false }],
-            parser: parser("typescript-parsers/unneeded-ternary-2"),
-            languageOptions: { ecmaVersion: 6 },
+            languageOptions: {
+                parser: require(parser("typescript-parsers/unneeded-ternary-2")),
+                ecmaVersion: 6
+            },
             errors: [{
                 messageId: "unnecessaryConditionalAssignment",
                 type: "ConditionalExpression"

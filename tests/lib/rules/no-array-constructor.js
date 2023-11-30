@@ -16,7 +16,11 @@ const rule = require("../../../lib/rules/no-array-constructor"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: "latest" } });
+const ruleTester = new RuleTester({
+    languageOptions: {
+        sourceType: "script"
+    }
+});
 
 ruleTester.run("no-array-constructor", rule, {
     valid: [
@@ -33,8 +37,10 @@ ruleTester.run("no-array-constructor", rule, {
         "var Array; new Array;",
         {
             code: "new Array()",
-            globals: {
-                Array: "off"
+            languageOptions: {
+                globals: {
+                    Array: "off"
+                }
             }
         }
     ],
@@ -276,7 +282,7 @@ ruleTester.run("no-array-constructor", rule, {
             { code: "for (let i = 0; i < 10; i++) Array();" },
             { code: "for (const prop in obj) Array();" },
             { code: "for (const element of iterable) Array();" },
-            { code: "with (obj) Array();" },
+            { code: "with (obj) Array();", languageOptions: { sourceType: "script" } },
 
             // No semicolon required before array literal because ASI still occurs
             {

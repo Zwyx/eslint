@@ -39,7 +39,9 @@ ruleTester.run("no-useless-constructor", rule, {
         "class A extends B { constructor(foo, bar) { super(bar); } }",
         {
             code: "declare class A { constructor(options: any); }",
-            parser: require("../../fixtures/parsers/typescript-parsers/declare-class")
+            languageOptions: {
+                parser: require("../../fixtures/parsers/typescript-parsers/declare-class")
+            }
         }
     ],
     invalid: [

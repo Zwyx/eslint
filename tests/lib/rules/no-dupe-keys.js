@@ -16,7 +16,12 @@ const rule = require("../../../lib/rules/no-dupe-keys"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+    languageOptions: {
+        ecmaVersion: 5,
+        sourceType: "script"
+    }
+});
 
 ruleTester.run("no-dupe-keys", rule, {
     valid: [

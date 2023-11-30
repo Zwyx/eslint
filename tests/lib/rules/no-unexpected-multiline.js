@@ -107,7 +107,9 @@ ruleTester.run("no-unexpected-multiline", rule, {
                     multiline
                 \`;
             `,
-            parser: require.resolve("../../fixtures/parsers/typescript-parsers/tagged-template-with-generic/tagged-template-with-generic-1")
+            languageOptions: {
+                parser: require("../../fixtures/parsers/typescript-parsers/tagged-template-with-generic/tagged-template-with-generic-1")
+            }
         },
         {
             code: `
@@ -117,7 +119,9 @@ ruleTester.run("no-unexpected-multiline", rule, {
                     multiline
                 \`;
             `,
-            parser: require.resolve("../../fixtures/parsers/typescript-parsers/tagged-template-with-generic/tagged-template-with-generic-2")
+            languageOptions: {
+                parser: require("../../fixtures/parsers/typescript-parsers/tagged-template-with-generic/tagged-template-with-generic-2")
+            }
         },
         {
             code: `
@@ -125,7 +129,9 @@ ruleTester.run("no-unexpected-multiline", rule, {
                   generic
                 >\`multiline\`;
             `,
-            parser: require.resolve("../../fixtures/parsers/typescript-parsers/tagged-template-with-generic/tagged-template-with-generic-3")
+            languageOptions: {
+                parser: require("../../fixtures/parsers/typescript-parsers/tagged-template-with-generic/tagged-template-with-generic-3")
+            }
         },
 
         // Optional chaining
@@ -337,7 +343,9 @@ ruleTester.run("no-unexpected-multiline", rule, {
                 "test",
                 "*/`foo`"
             ].join("\n"),
-            parser: require.resolve("../../fixtures/parsers/typescript-parsers/tagged-template-with-generic/tagged-template-with-generic-and-comment"),
+            languageOptions: {
+                parser: require("../../fixtures/parsers/typescript-parsers/tagged-template-with-generic/tagged-template-with-generic-and-comment"),
+            },
             errors: [
                 {
                     line: 5,

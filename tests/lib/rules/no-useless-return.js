@@ -9,19 +9,14 @@
 //------------------------------------------------------------------------------
 
 const rule = require("../../../lib/rules/no-useless-return"),
-    RuleTester = require("../../../lib/rule-tester/flat-rule-tester");
+    { RuleTester } = require("../../../lib/rule-tester");
 
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({
-    languageOptions: {
-        ecmaVersion: 5,
-        sourceType: "script"
-    }
-});
+const ruleTester = new RuleTester();
 
 ruleTester.run("no-useless-return", rule, {
     valid: [
@@ -132,23 +127,23 @@ ruleTester.run("no-useless-return", rule, {
                 for (var foo of bar) return;
               }
             `,
-            languageOptions: { ecmaVersion: 6 }
+            parserOptions: { ecmaVersion: 6 }
         },
         {
             code: "() => { if (foo) return; bar(); }",
-            languageOptions: { ecmaVersion: 6 }
+            parserOptions: { ecmaVersion: 6 }
         },
         {
             code: "() => 5",
-            languageOptions: { ecmaVersion: 6 }
+            parserOptions: { ecmaVersion: 6 }
         },
         {
             code: "() => { return; doSomething(); }",
-            languageOptions: { ecmaVersion: 6 }
+            parserOptions: { ecmaVersion: 6 }
         },
         {
             code: "if (foo) { return; } doSomething();",
-            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
+            parserOptions: { ecmaFeatures: { globalReturn: true } }
         },
 
         // https://github.com/eslint/eslint/issues/7477
@@ -244,12 +239,12 @@ ruleTester.run("no-useless-return", rule, {
         {
             code: "foo(); return;",
             output: "foo(); ",
-            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
+            parserOptions: { ecmaFeatures: { globalReturn: true } }
         },
         {
             code: "if (foo) { bar(); return; } else { baz(); }",
             output: "if (foo) { bar();  } else { baz(); }",
-            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
+            parserOptions: { ecmaFeatures: { globalReturn: true } }
         },
         {
             code: `
@@ -263,7 +258,7 @@ ruleTester.run("no-useless-return", rule, {
             output: `
               function foo() {
                 if (foo) {
-
+                  
                 }
                 return;
               }
@@ -292,7 +287,7 @@ ruleTester.run("no-useless-return", rule, {
                     doSomething();
                   default:
                     doSomethingElse();
-
+                    
                 }
               }
             `
@@ -316,7 +311,7 @@ ruleTester.run("no-useless-return", rule, {
                     doSomething();
                   case 1:
                     doSomething();
-
+                    
                 }
               }
             `
@@ -342,7 +337,7 @@ ruleTester.run("no-useless-return", rule, {
                   case 1:
                     if (a) {
                       doSomething();
-
+                      
                     }
                     break;
                   default:
@@ -374,7 +369,7 @@ ruleTester.run("no-useless-return", rule, {
                   case 1:
                     if (a) {
                       doSomething();
-
+                      
                     } else {
                       doSomething();
                     }
@@ -404,7 +399,7 @@ ruleTester.run("no-useless-return", rule, {
                   case 1:
                     if (a) {
                       doSomething();
-
+                      
                     }
                   default:
                 }
@@ -438,7 +433,7 @@ ruleTester.run("no-useless-return", rule, {
               function foo() {
                 try {
                   foo();
-
+                  
                 } catch (err) {
                   return 5;
                 }
@@ -461,7 +456,7 @@ ruleTester.run("no-useless-return", rule, {
                   if (something) {
                       try {
                           bar();
-
+                          
                       } catch (err) {}
                   }
               }
@@ -480,7 +475,7 @@ ruleTester.run("no-useless-return", rule, {
             output: `
               function foo() {
                 try {
-
+                  
                 } catch (err) {
                   foo();
                 }
@@ -500,7 +495,7 @@ ruleTester.run("no-useless-return", rule, {
             output: `
               function foo() {
                   try {
-
+                      
                   } finally {
                       bar();
                   }
@@ -529,7 +524,7 @@ ruleTester.run("no-useless-return", rule, {
                 } catch (e) {
                   try {
                     baz();
-
+                    
                   } catch (e) {
                     qux();
                   }
@@ -547,7 +542,7 @@ ruleTester.run("no-useless-return", rule, {
             output: `
               function foo() {
                 try {} finally {}
-
+                
               }
             `
         },
@@ -563,15 +558,13 @@ ruleTester.run("no-useless-return", rule, {
                 }
               }
             `,
-
-            // note: your editor might remove the line of spaces after `function bar()` below. There should be 20 leading spaces.
             output: `
               function foo() {
                 try {
                   return 5;
                 } finally {
                   function bar() {
-
+                    
                   }
                 }
               }
@@ -580,7 +573,7 @@ ruleTester.run("no-useless-return", rule, {
         {
             code: "() => { return; }",
             output: "() => {  }",
-            languageOptions: { ecmaVersion: 6 }
+            parserOptions: { ecmaVersion: 6 }
         },
         {
             code: "function foo() { return; return; }",

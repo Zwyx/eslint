@@ -16,7 +16,7 @@ const rule = require("../../../lib/rules/no-constructor-return"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 2015 } });
+const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 2015, sourceType: "script" } });
 
 const errors = [{ type: "ReturnStatement", messageId: "unexpected" }];
 

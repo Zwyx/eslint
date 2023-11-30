@@ -157,7 +157,9 @@ ruleTester.run("no-useless-rename", rule, {
          */
         {
             code: "const { ...foo } = bar;",
-            parser: require.resolve("../../fixtures/parsers/babel-eslint10/object-pattern-with-rest-element")
+            languageOptions: {
+                parser: require("../../fixtures/parsers/babel-eslint10/object-pattern-with-rest-element")
+            }
         }
     ],
 

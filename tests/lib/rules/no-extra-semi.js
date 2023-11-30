@@ -16,7 +16,12 @@ const rule = require("../../../lib/rules/no-extra-semi"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+    languageOptions: {
+        ecmaVersion: 5,
+        sourceType: "script"
+    }
+});
 
 ruleTester.run("no-extra-semi", rule, {
     valid: [

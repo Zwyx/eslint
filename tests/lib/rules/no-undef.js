@@ -10,19 +10,25 @@
 //------------------------------------------------------------------------------
 
 const rule = require("../../../lib/rules/no-undef"),
-    RuleTester = require("../../../lib/rule-tester/flat-rule-tester");
+    RuleTester = require("../../../lib/rule-tester/flat-rule-tester"),
+    globals = require("globals");
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+    languageOptions: {
+        ecmaVersion: 5,
+        sourceType: "script"
+    }
+});
 
 ruleTester.run("no-undef", rule, {
     valid: [
         "var a = 1, b = 2; a;",
         "/*global b*/ function f() { b; }",
-        { code: "function f() { b; }", globals: { b: false } },
+        { code: "function f() { b; }", languageOptions: { globals: { b: false } } },
         "/*global b a:false*/  a;  function f() { b; a; }",
         "function a(){}  a();",
         "function f(b) { b; }",
@@ -43,7 +49,7 @@ ruleTester.run("no-undef", rule, {
         { code: "function foo() { var [a, b=4] = [1, 2]; return {a, b}; }", languageOptions: { ecmaVersion: 6 } },
         { code: "var toString = 1;", languageOptions: { ecmaVersion: 6 } },
         { code: "function myFunc(...foo) {  return foo;}", languageOptions: { ecmaVersion: 6 } },
-        { code: "var React, App, a=1; React.render(<App attr={a} />);", languageOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } } },
+        { code: "var React, App, a=1; React.render(<App attr={a} />);", languageOptions: { ecmaVersion: 6, parserOptions: { ecmaFeatures: { jsx: true } } } },
         { code: "var console; [1,2,3].forEach(obj => {\n  console.log(obj);\n});", languageOptions: { ecmaVersion: 6 } },
         { code: "var Foo; class Bar extends Foo { constructor() { super();  }}", languageOptions: { ecmaVersion: 6 } },
         { code: "import Warning from '../lib/warning'; var warn = new Warning('text');", languageOptions: { ecmaVersion: 6, sourceType: "module" } },
@@ -52,18 +58,18 @@ ruleTester.run("no-undef", rule, {
         { code: "var a; ({a} = {});", languageOptions: { ecmaVersion: 6 } },
         { code: "var a; ({b: a} = {});", languageOptions: { ecmaVersion: 6 } },
         { code: "var obj; [obj.a, obj.b] = [0, 1];", languageOptions: { ecmaVersion: 6 } },
-        { code: "URLSearchParams;", env: { browser: true } },
-        { code: "Intl;", env: { browser: true } },
-        { code: "IntersectionObserver;", env: { browser: true } },
-        { code: "Credential;", env: { browser: true } },
-        { code: "requestIdleCallback;", env: { browser: true } },
-        { code: "customElements;", env: { browser: true } },
-        { code: "PromiseRejectionEvent;", env: { browser: true } },
+        { code: "URLSearchParams;", languageOptions: { globals: globals.browser } },
+        { code: "Intl;", languageOptions: { globals: globals.browser } },
+        { code: "IntersectionObserver;", languageOptions: { globals: globals.browser } },
+        { code: "Credential;", languageOptions: { globals: globals.browser } },
+        { code: "requestIdleCallback;", languageOptions: { globals: globals.browser } },
+        { code: "customElements;", languageOptions: { globals: globals.browser } },
+        { code: "PromiseRejectionEvent;", languageOptions: { globals: globals.browser } },
         { code: "(foo, bar) => { foo ||= WeakRef; bar ??= FinalizationRegistry; }", languageOptions: { ecmaVersion: 2021 } },
 
         // Notifications of readonly are removed: https://github.com/eslint/eslint/issues/4504
         "/*global b:false*/ function f() { b = 1; }",
-        { code: "function f() { b = 1; }", globals: { b: false } },
+        { code: "function f() { b = 1; }", languageOptions: { globals: { b: false } } },
         "/*global b:false*/ function f() { b++; }",
         "/*global b*/ b = 1;",
         "/*global b:false*/ var b = 1;",
@@ -76,9 +82,9 @@ ruleTester.run("no-undef", rule, {
         {
             code: "var {bacon, ...others} = stuff; foo(others)",
             languageOptions: {
-                ecmaVersion: 2018
+                ecmaVersion: 2018,
+                globals: { stuff: false, foo: false }
             },
-            globals: { stuff: false, foo: false }
         },
 
         // export * as ns from "source"
@@ -161,8 +167,8 @@ ruleTester.run("no-undef", rule, {
         { code: "function f() { b; }", errors: [{ messageId: "undef", data: { name: "b" }, type: "Identifier" }] },
         { code: "window;", errors: [{ messageId: "undef", data: { name: "window" }, type: "Identifier" }] },
         { code: "require(\"a\");", errors: [{ messageId: "undef", data: { name: "require" }, type: "Identifier" }] },
-        { code: "var React; React.render(<img attr={a} />);", languageOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } }, errors: [{ messageId: "undef", data: { name: "a" } }] },
-        { code: "var React, App; React.render(<App attr={a} />);", languageOptions: { ecmaVersion: 6, ecmaFeatures: { jsx: true } }, errors: [{ messageId: "undef", data: { name: "a" } }] },
+        { code: "var React; React.render(<img attr={a} />);", languageOptions: { ecmaVersion: 6, parserOptions: { ecmaFeatures: { jsx: true } } }, errors: [{ messageId: "undef", data: { name: "a" } }] },
+        { code: "var React, App; React.render(<App attr={a} />);", languageOptions: { ecmaVersion: 6, parserOptions: { ecmaFeatures: { jsx: true } } }, errors: [{ messageId: "undef", data: { name: "a" } }] },
         { code: "[a] = [0];", languageOptions: { ecmaVersion: 6 }, errors: [{ messageId: "undef", data: { name: "a" } }] },
         { code: "({a} = {});", languageOptions: { ecmaVersion: 6 }, errors: [{ messageId: "undef", data: { name: "a" } }] },
         { code: "({b: a} = {});", languageOptions: { ecmaVersion: 6 }, errors: [{ messageId: "undef", data: { name: "a" } }] },

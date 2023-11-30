@@ -12,12 +12,12 @@ const RuleTester = require("../../../lib/rule-tester/flat-rule-tester");
 // Tests
 //------------------------------------------------------------------------------
 
-const parserOptions = {
+const languageOptions = {
     ecmaVersion: 2021,
     sourceType: "module"
 };
 
-const ruleTester = new RuleTester({ parserOptions });
+const ruleTester = new RuleTester({ languageOptions });
 
 ruleTester.run("no-unsafe-optional-chaining", rule, {
     valid: [

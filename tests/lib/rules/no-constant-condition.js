@@ -193,9 +193,9 @@ ruleTester.run("no-constant-condition", rule, {
         "if (foo.Boolean(1)) {}",
         "function foo(Boolean) { if (Boolean(1)) {} }",
         "const Boolean = () => {}; if (Boolean(1)) {}",
-        { code: "if (Boolean()) {}", globals: { Boolean: "off" } },
+        { code: "if (Boolean()) {}", languageOptions: { globals: { Boolean: "off" } } },
         "const undefined = 'lol'; if (undefined) {}",
-        { code: "if (undefined) {}", globals: { undefined: "off" } }
+        { code: "if (undefined) {}", languageOptions: { globals: { undefined: "off" } } }
     ],
     invalid: [
         { code: "for(;true;);", errors: [{ messageId: "unexpected", type: "Literal" }] },
