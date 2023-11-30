@@ -218,14 +218,14 @@ ruleTester.run("no-array-constructor", rule, {
                 <foo />
                 Array()
                 `,
-                languageOptions: { ecmaFeatures: { jsx: true } }
+                languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
             },
             {
                 code: `
                 <foo></foo>
                 Array()
                 `,
-                languageOptions: { ecmaFeatures: { jsx: true } }
+                languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
             }
         ].map(props => ({
             ...props,

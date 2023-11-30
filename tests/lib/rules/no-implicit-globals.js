@@ -188,11 +188,11 @@ ruleTester.run("no-implicit-globals", rule, {
         },
         {
             code: "var foo = 1;",
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: "function foo() {}",
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: "var foo = 1;",
@@ -798,7 +798,7 @@ ruleTester.run("no-implicit-globals", rule, {
         },
         {
             code: "foo = 1;",
-            languageOptions: { ecmaFeatures: { globalReturn: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } },
             errors: [
                 {
                     message: leakMessage,

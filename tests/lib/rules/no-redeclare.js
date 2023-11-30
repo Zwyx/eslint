@@ -96,9 +96,9 @@ ruleTester.run("no-redeclare", rule, {
         },
         { code: "var Object = 0;", options: [{ builtinGlobals: false }] },
         { code: "var Object = 0;", options: [{ builtinGlobals: true }], languageOptions: { ecmaVersion: 6, sourceType: "module" } },
-        { code: "var Object = 0;", options: [{ builtinGlobals: true }], languageOptions: { ecmaFeatures: { globalReturn: true } } },
+        { code: "var Object = 0;", options: [{ builtinGlobals: true }], languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } } },
         { code: "var top = 0;", options: [{ builtinGlobals: true }] },
-        { code: "var top = 0;", options: [{ builtinGlobals: true }], languageOptions: { ecmaFeatures: { globalReturn: true } }, env: { browser: true } },
+        { code: "var top = 0;", options: [{ builtinGlobals: true }], languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }, env: { browser: true } },
         { code: "var top = 0;", options: [{ builtinGlobals: true }], languageOptions: { ecmaVersion: 6, sourceType: "module" }, env: { browser: true } },
         {
             code: "var self = 1",

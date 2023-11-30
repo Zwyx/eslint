@@ -2244,35 +2244,35 @@ ruleTester.run("padding-line-between-statements", rule, {
             options: [
                 { blankLine: "always", prev: "*", next: "return" }
             ],
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: "var a;\n\nreturn;",
             options: [
                 { blankLine: "always", prev: "*", next: "return" }
             ],
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: "// comment\nreturn;",
             options: [
                 { blankLine: "always", prev: "*", next: "return" }
             ],
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: "/* comment */\nreturn;",
             options: [
                 { blankLine: "always", prev: "*", next: "return" }
             ],
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: "/* multi-line\ncomment */\nreturn;",
             options: [
                 { blankLine: "always", prev: "*", next: "return" }
             ],
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
 
         //----------------------------------------------------------------------
@@ -2541,7 +2541,7 @@ ruleTester.run("padding-line-between-statements", rule, {
             options: [
                 { blankLine: "always", prev: "block-like", next: "*" }
             ],
-            languageOptions: { ecmaFeatures: { jsx: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         },
         {
             code: "var i = 0;\nwhile (i < 100) {\nif(i % 2 === 0) {continue;}\n++i;\n}",
@@ -4692,7 +4692,7 @@ ruleTester.run("padding-line-between-statements", rule, {
             options: [
                 { blankLine: "always", prev: "*", next: "return" }
             ],
-            languageOptions: { ecmaFeatures: { globalReturn: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } },
             errors: [{ messageId: "expectedBlankLine" }]
         },
         {
@@ -4701,7 +4701,7 @@ ruleTester.run("padding-line-between-statements", rule, {
             options: [
                 { blankLine: "always", prev: "*", next: "return" }
             ],
-            languageOptions: { ecmaFeatures: { globalReturn: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } },
             errors: [{ messageId: "expectedBlankLine" }]
         },
         {

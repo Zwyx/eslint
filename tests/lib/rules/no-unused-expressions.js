@@ -87,25 +87,25 @@ ruleTester.run("no-unused-expressions", rule, {
         // JSX
         {
             code: "<div />",
-            languageOptions: { ecmaFeatures: { jsx: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         },
         {
             code: "<></>",
-            languageOptions: { ecmaFeatures: { jsx: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         },
         {
             code: "var partial = <div />",
-            languageOptions: { ecmaFeatures: { jsx: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         },
         {
             code: "var partial = <div />",
             options: [{ enforceForJSX: true }],
-            languageOptions: { ecmaFeatures: { jsx: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         },
         {
             code: "var partial = <></>",
             options: [{ enforceForJSX: true }],
-            languageOptions: { ecmaFeatures: { jsx: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         }
     ],
     invalid: [
@@ -182,13 +182,13 @@ ruleTester.run("no-unused-expressions", rule, {
         {
             code: "<div />",
             options: [{ enforceForJSX: true }],
-            languageOptions: { ecmaFeatures: { jsx: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
             errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
         },
         {
             code: "<></>",
             options: [{ enforceForJSX: true }],
-            languageOptions: { ecmaFeatures: { jsx: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
             errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
         },
 

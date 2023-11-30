@@ -361,7 +361,7 @@ ruleTester.run("quotes", rule, {
             code: "<div blah={\"blah\"} />",
             output: "<div blah={'blah'} />",
             options: ["single"],
-            languageOptions: { ecmaFeatures: { jsx: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
             errors: [
                 {
                     messageId: "wrongQuotes",
@@ -374,7 +374,7 @@ ruleTester.run("quotes", rule, {
             code: "<div blah={'blah'} />",
             output: "<div blah={\"blah\"} />",
             options: ["double"],
-            languageOptions: { ecmaFeatures: { jsx: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
             errors: [
                 {
                     messageId: "wrongQuotes",

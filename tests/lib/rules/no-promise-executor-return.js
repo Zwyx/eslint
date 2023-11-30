@@ -113,7 +113,7 @@ ruleTester.run("no-promise-executor-return", rule, {
         },
         {
             code: "return 1;",
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: "return 1; function foo(){ return 1; } return 1;",

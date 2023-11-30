@@ -569,8 +569,8 @@ ruleTester.run("keyword-spacing", rule, {
         { code: "`${ delete foo.a}`", options: [NEITHER], languageOptions: { ecmaVersion: 6 } },
 
         // not conflict with `jsx-curly-spacing`
-        { code: "<Foo onClick={delete foo.a} />", languageOptions: { ecmaFeatures: { jsx: true } } },
-        { code: "<Foo onClick={ delete foo.a} />", options: [NEITHER], languageOptions: { ecmaFeatures: { jsx: true } } },
+        { code: "<Foo onClick={delete foo.a} />", languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
+        { code: "<Foo onClick={ delete foo.a} />", options: [NEITHER], languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
 
         //----------------------------------------------------------------------
         // do
@@ -778,8 +778,8 @@ ruleTester.run("keyword-spacing", rule, {
         { code: "`${ function() {}}`", options: [NEITHER], languageOptions: { ecmaVersion: 6 } },
 
         // not conflict with `jsx-curly-spacing`
-        { code: "<Foo onClick={function() {}} />", languageOptions: { ecmaFeatures: { jsx: true } } },
-        { code: "<Foo onClick={ function() {}} />", options: [NEITHER], languageOptions: { ecmaFeatures: { jsx: true } } },
+        { code: "<Foo onClick={function() {}} />", languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
+        { code: "<Foo onClick={ function() {}} />", options: [NEITHER], languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
 
         //----------------------------------------------------------------------
         // get
@@ -946,8 +946,8 @@ ruleTester.run("keyword-spacing", rule, {
         { code: "`${ new foo()}`", options: [NEITHER], languageOptions: { ecmaVersion: 6 } },
 
         // not conflict with `jsx-curly-spacing`
-        { code: "<Foo onClick={new foo()} />", languageOptions: { ecmaFeatures: { jsx: true } } },
-        { code: "<Foo onClick={ new foo()} />", options: [NEITHER], languageOptions: { ecmaFeatures: { jsx: true } } },
+        { code: "<Foo onClick={new foo()} />", languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
+        { code: "<Foo onClick={ new foo()} />", options: [NEITHER], languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
 
         //----------------------------------------------------------------------
         // of
@@ -966,13 +966,13 @@ ruleTester.run("keyword-spacing", rule, {
         "function foo() { {} return +a }",
         {
             code: "function foo() { return <p/>; }",
-            languageOptions: { ecmaFeatures: { jsx: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         },
         { code: "function foo() { {}return+a }", options: [NEITHER] },
         {
             code: "function foo() { return<p/>; }",
             options: [{ after: false }],
-            languageOptions: { ecmaFeatures: { jsx: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         },
         { code: "function foo() { {} return +a }", options: [override("return", BOTH)] },
         { code: "function foo() { {}return+a }", options: [override("return", NEITHER)] },
@@ -1203,8 +1203,8 @@ ruleTester.run("keyword-spacing", rule, {
         { code: "`${ this }`", options: [NEITHER], languageOptions: { ecmaVersion: 6 } },
 
         // not conflict with `jsx-curly-spacing`
-        { code: "<Foo onClick={this} />", languageOptions: { ecmaFeatures: { jsx: true } } },
-        { code: "<Foo onClick={ this } />", options: [NEITHER], languageOptions: { ecmaFeatures: { jsx: true } } },
+        { code: "<Foo onClick={this} />", languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
+        { code: "<Foo onClick={ this } />", options: [NEITHER], languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
 
         //----------------------------------------------------------------------
         // throw
@@ -1304,8 +1304,8 @@ ruleTester.run("keyword-spacing", rule, {
         { code: "`${ typeof foo}`", options: [NEITHER], languageOptions: { ecmaVersion: 6 } },
 
         // not conflict with `jsx-curly-spacing`
-        { code: "<Foo onClick={typeof foo} />", languageOptions: { ecmaFeatures: { jsx: true } } },
-        { code: "<Foo onClick={ typeof foo} />", options: [NEITHER], languageOptions: { ecmaFeatures: { jsx: true } } },
+        { code: "<Foo onClick={typeof foo} />", languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
+        { code: "<Foo onClick={ typeof foo} />", options: [NEITHER], languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
 
         //----------------------------------------------------------------------
         // var
@@ -1387,8 +1387,8 @@ ruleTester.run("keyword-spacing", rule, {
         { code: "`${ void foo}`", options: [NEITHER], languageOptions: { ecmaVersion: 6 } },
 
         // not conflict with `jsx-curly-spacing`
-        { code: "<Foo onClick={void foo} />", languageOptions: { ecmaFeatures: { jsx: true } } },
-        { code: "<Foo onClick={ void foo} />", options: [NEITHER], languageOptions: { ecmaFeatures: { jsx: true } } },
+        { code: "<Foo onClick={void foo} />", languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
+        { code: "<Foo onClick={ void foo} />", options: [NEITHER], languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
 
         //----------------------------------------------------------------------
         // while
@@ -3103,7 +3103,7 @@ ruleTester.run("keyword-spacing", rule, {
         {
             code: "function foo() { return<p/>; }",
             output: "function foo() { return <p/>; }",
-            languageOptions: { ecmaFeatures: { jsx: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
             errors: expectedAfter("return")
         },
         {
@@ -3116,7 +3116,7 @@ ruleTester.run("keyword-spacing", rule, {
             code: "function foo() { return <p/>; }",
             output: "function foo() { return<p/>; }",
             options: [{ after: false }],
-            languageOptions: { ecmaFeatures: { jsx: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
             errors: unexpectedAfter("return")
         },
         {

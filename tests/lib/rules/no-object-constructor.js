@@ -174,14 +174,14 @@ ruleTester.run("no-object-constructor", rule, {
                 <foo />
                 Object()
                 `,
-                languageOptions: { ecmaFeatures: { jsx: true } }
+                languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
             },
             {
                 code: `
                 <foo></foo>
                 Object()
                 `,
-                languageOptions: { ecmaFeatures: { jsx: true } }
+                languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
             }
         ].map(props => ({
             ...props,

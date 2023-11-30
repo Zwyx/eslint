@@ -17,6 +17,10 @@ const rule = require("../../../lib/rules/no-unused-vars"),
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
+    languageOptions: {
+        ecmaVersion: 5,
+        sourceType: "script"
+    },
     plugins: {
         custom: {
             rules: {
@@ -119,7 +123,7 @@ ruleTester.run("no-unused-vars", rule, {
         { code: "function g(bar, baz) { return bar + baz; }; g();", options: [{ vars: "local", args: "all" }] },
         { code: "var g = function(bar, baz) { return 2; }; g();", options: [{ vars: "all", args: "none" }] },
         "(function z() { z(); })();",
-        { code: " ", globals: { a: true } },
+        { code: " ", languageOptions: { globals: { a: true } } },
         { code: "var who = \"Paul\";\nmodule.exports = `Hello ${who}!`;", languageOptions: { ecmaVersion: 6 } },
         { code: "export var foo = 123;", languageOptions: { ecmaVersion: 6, sourceType: "module" } },
         { code: "export function foo () {}", languageOptions: { ecmaVersion: 6, sourceType: "module" } },
@@ -131,9 +135,9 @@ ruleTester.run("no-unused-vars", rule, {
         "function foo() {var foo = 1; return foo}; foo();",
         "function foo(foo) {return foo}; foo(1);",
         "function foo() {function foo() {return 1;}; return foo()}; foo();",
-        { code: "function foo() {var foo = 1; return foo}; foo();", languageOptions: { languageOptions: { ecmaVersion: 6 } } },
-        { code: "function foo(foo) {return foo}; foo(1);", languageOptions: { languageOptions: { ecmaVersion: 6 } } },
-        { code: "function foo() {function foo() {return 1;}; return foo()}; foo();", languageOptions: { languageOptions: { ecmaVersion: 6 } } },
+        { code: "function foo() {var foo = 1; return foo}; foo();", languageOptions: { ecmaVersion: 6 } },
+        { code: "function foo(foo) {return foo}; foo(1);", languageOptions: { ecmaVersion: 6 } },
+        { code: "function foo() {function foo() {return 1;}; return foo()}; foo();", languageOptions: { ecmaVersion: 6 } },
         { code: "const x = 1; const [y = x] = []; foo(y);", languageOptions: { ecmaVersion: 6 } },
         { code: "const x = 1; const {y = x} = {}; foo(y);", languageOptions: { ecmaVersion: 6 } },
         { code: "const x = 1; const {z: [y = x]} = {}; foo(y);", languageOptions: { ecmaVersion: 6 } },

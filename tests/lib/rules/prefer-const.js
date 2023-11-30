@@ -460,7 +460,7 @@ ruleTester.run("prefer-const", rule, {
         {
             code: "/*eslint custom/use-x:error*/ let x = 1",
             output: "/*eslint custom/use-x:error*/ const x = 1",
-            languageOptions: { ecmaFeatures: { globalReturn: true } },
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } },
             errors: [{ messageId: "useConst", data: { name: "x" }, type: "Identifier" }]
         },
         {

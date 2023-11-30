@@ -244,12 +244,12 @@ ruleTester.run("no-useless-return", rule, {
         {
             code: "foo(); return;",
             output: "foo(); ",
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: "if (foo) { bar(); return; } else { baz(); }",
             output: "if (foo) { bar();  } else { baz(); }",
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
         {
             code: `
@@ -563,6 +563,8 @@ ruleTester.run("no-useless-return", rule, {
                 }
               }
             `,
+
+            // note: your editor might remove the line of spaces after `function bar()` below. There should be 20 leading spaces.
             output: `
               function foo() {
                 try {
