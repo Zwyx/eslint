@@ -16,7 +16,12 @@ const rule = require("../../../lib/rules/logical-assignment-operators"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 2021 } });
+const ruleTester = new RuleTester({
+    languageOptions: {
+        ecmaVersion: 2021,
+        sourceType: "script"
+    }
+});
 
 ruleTester.run("logical-assignment-operators", rule, {
     valid: [
@@ -1486,13 +1491,17 @@ ruleTester.run("logical-assignment-operators", rule, {
             code: "a ||= b as number;",
             output: "a = a || (b as number);",
             options: ["never"],
-            parser: parser("typescript-parsers/logical-assignment-with-assertion"),
+            languageOptions: {
+                parser: require(parser("typescript-parsers/logical-assignment-with-assertion")),
+            },
             errors: [{ messageId: "unexpected", type: "AssignmentExpression", data: { operator: "||=" } }]
         },
         {
             code: "a.b.c || (a.b.c = d as number)",
             output: null,
-            parser: parser("typescript-parsers/logical-with-assignment-with-assertion-1"),
+            languageOptions: {
+                parser: require(parser("typescript-parsers/logical-with-assignment-with-assertion-1")),
+            },
             errors: [{
                 messageId: "logical",
                 type: "LogicalExpression",
@@ -1507,7 +1516,9 @@ ruleTester.run("logical-assignment-operators", rule, {
         {
             code: "a.b.c || (a.b.c = (d as number))",
             output: null,
-            parser: parser("typescript-parsers/logical-with-assignment-with-assertion-2"),
+            languageOptions: {
+                parser: require(parser("typescript-parsers/logical-with-assignment-with-assertion-2")),
+            },
             errors: [{
                 messageId: "logical",
                 type: "LogicalExpression",
@@ -1522,7 +1533,9 @@ ruleTester.run("logical-assignment-operators", rule, {
         {
             code: "(a.b.c || (a.b.c = d)) as number",
             output: null,
-            parser: parser("typescript-parsers/logical-with-assignment-with-assertion-3"),
+            languageOptions: {
+                parser: require(parser("typescript-parsers/logical-with-assignment-with-assertion-3")),
+            },
             errors: [{
                 messageId: "logical",
                 type: "LogicalExpression",

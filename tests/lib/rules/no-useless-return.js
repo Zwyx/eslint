@@ -16,7 +16,12 @@ const rule = require("../../../lib/rules/no-useless-return"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+    languageOptions: {
+        ecmaVersion: 5,
+        sourceType: "script"
+    }
+});
 
 ruleTester.run("no-useless-return", rule, {
     valid: [
@@ -143,7 +148,7 @@ ruleTester.run("no-useless-return", rule, {
         },
         {
             code: "if (foo) { return; } doSomething();",
-            languageOptions: { ecmaFeatures: { globalReturn: true } }
+            languageOptions: { parserOptions: { ecmaFeatures: { globalReturn: true } } }
         },
 
         // https://github.com/eslint/eslint/issues/7477

@@ -15,7 +15,7 @@ const rule = require("../../../lib/rules/max-classes-per-file"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 6 } });
+const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 6, sourceType: "script" } });
 
 ruleTester.run("max-classes-per-file", rule, {
     valid: [

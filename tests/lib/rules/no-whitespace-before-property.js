@@ -845,6 +845,7 @@ ruleTester.run("no-whitespace-before-property", rule, {
         {
             code: "08      .toExponential()",
             output: null, // Not fixed
+            languageOptions: { sourceType: "script" },
             errors: [{
                 messageId: "unexpectedWhitespace",
                 data: { propName: "toExponential" }
@@ -853,6 +854,7 @@ ruleTester.run("no-whitespace-before-property", rule, {
         {
             code: "0192    .toExponential()",
             output: null, // Not fixed
+            languageOptions: { sourceType: "script" },
             errors: [{
                 messageId: "unexpectedWhitespace",
                 data: { propName: "toExponential" }
@@ -945,6 +947,7 @@ ruleTester.run("no-whitespace-before-property", rule, {
         {
             code: "05 .toExponential()",
             output: "05.toExponential()",
+            languageOptions: { sourceType: "script" },
             errors: [{
                 messageId: "unexpectedWhitespace",
                 data: { propName: "toExponential" }

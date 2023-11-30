@@ -16,7 +16,12 @@ const rule = require("../../../lib/rules/no-use-before-define"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+    languageOptions: {
+        ecmaVersion: 5,
+        sourceType: "script"
+    }
+});
 
 ruleTester.run("no-use-before-define", rule, {
     valid: [

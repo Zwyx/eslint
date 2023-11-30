@@ -16,7 +16,7 @@ const RuleTester = require("../../../lib/rule-tester/flat-rule-tester");
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 2018 } });
+const ruleTester = new RuleTester({ languageOptions: { ecmaVersion: 2018, sourceType: "script" } });
 
 ruleTester.run("no-useless-backreference", rule, {
     valid: [
